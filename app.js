@@ -15,7 +15,6 @@ const client = new Twitter({
 app.use(cors());
 app.use(bodyParser.json());
 
-
 app.get("/", (request, response) => {
   queries
     .list("personalLocations")
@@ -31,12 +30,8 @@ app.get("/", (request, response) => {
 });
 
 app.get("/tweets", (request, response) => {
-  var params = { id: 2487889 };
-  client.get("trends/place", params, function(
-    error,
-    tweets,
-    twitterResponse
-  ) {
+  var params = { id: 23424977 };
+  client.get("trends/place", params, function(error, tweets, twitterResponse) {
     if (!error) {
       console.log(tweets);
       response.send({ tweets });
@@ -57,7 +52,9 @@ app.get("/personalLocations/:id", (request, response) => {
   queries
     .read(request.params.id)
     .then(personalLocations => {
-      personalLocations ? response.json({ personalLocations }) : response.sendStatus(404);
+      personalLocations
+        ? response.json({ personalLocations })
+        : response.sendStatus(404);
     })
     .catch(console.error);
 });
