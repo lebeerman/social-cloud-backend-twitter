@@ -9,6 +9,12 @@ module.exports = {
       .where("id", id)
       .first();
   },
+  getTrends(id, table) {
+    return database(table)
+      .where("WOE_ID", id)
+      .returning("*")
+      .first();
+  },
   createLocations(personalLocations) {
     return database("personalLocations")
       .insert(personalLocations)

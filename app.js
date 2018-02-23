@@ -15,7 +15,6 @@ const client = new Twitter({
 app.use(cors());
 app.use(bodyParser.json());
 
-
 app.get("/", (request, response) => {
   queries
     .list("personalLocations")
@@ -31,14 +30,20 @@ app.get("/", (request, response) => {
 });
 
 app.get("/tweets", (request, response) => {
-  var params = { id: 2487889 };
-  client.get("trends/place", params, function(
-    error,
-    tweets,
-    twitterResponse
-  ) {
+  var params = { id: 23424977 };
+  client.get("trends/place", params, function(error, tweets, twitterResponse) {
     if (!error) {
       console.log(tweets);
+      response.send({ tweets });
+    }
+  });
+});
+
+app.get("/tweets/:id", (request, response) => {
+  var id = {id: request.params.id};
+  client.get("trends/place", id, function(error, tweets, twitterResponse) {
+    if (!error) {
+      console.error(error);
       response.send({ tweets });
     }
   });
@@ -55,9 +60,11 @@ app.get("/personalLocations", (request, response) => {
 
 app.get("/personalLocations/:id", (request, response) => {
   queries
-    .read(request.params.id)
+    .read(request.params.id, "personalLocations")
     .then(personalLocations => {
-      personalLocations ? response.json({ personalLocations }) : response.sendStatus(404);
+      personalLocations
+        ? response.json({ personalLocations })
+        : response.sendStatus(404);
     })
     .catch(console.error);
 });
@@ -73,7 +80,7 @@ app.get("/woeid", (request, response) => {
 
 app.get("/woeid/:id", (request, response) => {
   queries
-    .read(request.params.id)
+    .read(request.params.id, "woeid")
     .then(woeid => {
       woeid ? response.json({ woeid }) : response.sendStatus(404);
     })
@@ -82,7 +89,7 @@ app.get("/woeid/:id", (request, response) => {
 
 app.post("/personalLocations", (request, response) => {
   queries
-    .create(request.body)
+    .createLocations(request.body)
     .then(personalLocations => {
       response.status(201).json({ personalLocations: personalLocations });
     })
@@ -91,7 +98,7 @@ app.post("/personalLocations", (request, response) => {
 
 app.delete("/personalLocations/:id", (request, response) => {
   queries
-    .delete(request.params.id)
+    .deleteLocations(request.params.id)
     .then(() => {
       response.sendStatus(204);
     })
@@ -100,7 +107,7 @@ app.delete("/personalLocations/:id", (request, response) => {
 
 app.put("/personalLocations/:id", (request, response) => {
   queries
-    .update(request.params.id, request.body)
+    .updateLocations(request.params.id, request.body)
     .then(personalLocations => {
       response.json({ personalLocations: personalLocations[0] });
     })
