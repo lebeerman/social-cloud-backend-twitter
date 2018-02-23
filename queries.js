@@ -9,8 +9,8 @@ module.exports = {
       .where("id", id)
       .first();
   },
-  getTrends(id) {
-    return database("woeid")
+  getTrends(id, table) {
+    return database(table)
       .where("WOE_ID", id)
       .returning("*")
       .first();

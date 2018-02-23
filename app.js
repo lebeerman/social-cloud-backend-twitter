@@ -40,10 +40,10 @@ app.get("/tweets", (request, response) => {
 });
 
 app.get("/tweets/:id", (request, response) => {
-  queries.getTrends(request.params.id);
-  client.get("trends/place", function(error, tweets, twitterResponse) {
+  var id = {id: request.params.id};
+  client.get("trends/place", id, function(error, tweets, twitterResponse) {
     if (!error) {
-      console.log(tweets);
+      console.error(error);
       response.send({ tweets });
     }
   });
