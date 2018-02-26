@@ -98,6 +98,57 @@ app.get("/woeid/:id", (request, response) => {
     })
     .catch(console.error);
 });
+app.get("/countrywoeid", (request, response) => {
+  queries
+    .list("countrywoeid")
+    .then(woeid => {
+      response.json({ woeid });
+    })
+    .catch(error => console.log(error));
+});
+
+app.get("/countrywoeid/:id", (request, response) => {
+  queries
+    .read(request.params.id, "countrywoeid")
+    .then(woeid => {
+      woeid ? response.json({ woeid }) : response.sendStatus(404);
+    })
+    .catch(console.error);
+});
+app.get("/stateswoeid", (request, response) => {
+  queries
+    .list("stateswoeid")
+    .then(woeid => {
+      response.json({ woeid });
+    })
+    .catch(error => console.log(error));
+});
+
+app.get("/stateswoeid/:id", (request, response) => {
+  queries
+    .read(request.params.id, "stateswoeid")
+    .then(woeid => {
+      woeid ? response.json({ woeid }) : response.sendStatus(404);
+    })
+    .catch(console.error);
+});
+app.get("/citieswoeid", (request, response) => {
+  queries
+    .list("citieswoeid")
+    .then(woeid => {
+      response.json({ woeid });
+    })
+    .catch(error => console.log(error));
+});
+
+app.get("/citieswoeid/:id", (request, response) => {
+  queries
+    .read(request.params.id, "citieswoeid")
+    .then(woeid => {
+      woeid ? response.json({ woeid }) : response.sendStatus(404);
+    })
+    .catch(console.error);
+});
 
 app.post("/personalLocations", (request, response) => {
   queries
