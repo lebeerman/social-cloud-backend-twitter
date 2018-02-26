@@ -101,8 +101,8 @@ app.get("/woeid/:id", (request, response) => {
 app.get("/countrywoeid", (request, response) => {
   queries
     .list("countrywoeid")
-    .then(woeid => {
-      response.json({ woeid });
+    .then(countrywoeid => {
+      response.json({ countrywoeid });
     })
     .catch(error => console.log(error));
 });
@@ -110,16 +110,16 @@ app.get("/countrywoeid", (request, response) => {
 app.get("/countrywoeid/:id", (request, response) => {
   queries
     .read(request.params.id, "countrywoeid")
-    .then(woeid => {
-      woeid ? response.json({ woeid }) : response.sendStatus(404);
+    .then(countrywoeid => {
+      countrywoeid ? response.json({ countrywoeid }) : response.sendStatus(404);
     })
     .catch(console.error);
 });
 app.get("/stateswoeid", (request, response) => {
   queries
     .list("stateswoeid")
-    .then(woeid => {
-      response.json({ woeid });
+    .then(stateswoeid => {
+      response.json({ stateswoeid });
     })
     .catch(error => console.log(error));
 });
@@ -127,16 +127,16 @@ app.get("/stateswoeid", (request, response) => {
 app.get("/stateswoeid/:id", (request, response) => {
   queries
     .read(request.params.id, "stateswoeid")
-    .then(woeid => {
-      woeid ? response.json({ woeid }) : response.sendStatus(404);
+    .then(stateswoeid => {
+      stateswoeid ? response.json({ stateswoeid }) : response.sendStatus(404);
     })
     .catch(console.error);
 });
 app.get("/citieswoeid", (request, response) => {
   queries
     .list("citieswoeid")
-    .then(woeid => {
-      response.json({ woeid });
+    .then(citieswoeid => {
+      response.json({ citieswoeid });
     })
     .catch(error => console.log(error));
 });
@@ -144,8 +144,8 @@ app.get("/citieswoeid", (request, response) => {
 app.get("/citieswoeid/:id", (request, response) => {
   queries
     .read(request.params.id, "citieswoeid")
-    .then(woeid => {
-      woeid ? response.json({ woeid }) : response.sendStatus(404);
+    .then(citieswoeid => {
+      citieswoeid ? response.json({ citieswoeid }) : response.sendStatus(404);
     })
     .catch(console.error);
 });
