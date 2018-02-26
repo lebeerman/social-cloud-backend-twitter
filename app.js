@@ -24,9 +24,15 @@ app.get("/", (request, response) => {
     .list("personalLocations")
     .then(personalLocations =>
       queries.list("woeid").then(woeid =>
+        queries.list("countrywoeid").then(countrywoeid =>
+          queries.list("stateswoeid").then(stateswoeid =>
+            queries.list("citieswoeid").then(citieswoeid =>
         response.json({
           personalLocations: personalLocations,
-          woeid: woeid
+          woeid: woeid,
+          countrywoeid: countrywoeid,
+          stateswoeid: stateswoeid,
+          citieswoeid: citieswoeid
         })
       )
     )
