@@ -188,28 +188,52 @@ exports.seed = function(knex, Promise) {
           Parent_ID: 12588631
         },
         {
-          WOE_ID: 2405641,
-          ISO: "US",
-          Name: "Fort Collins",
-          Language: "ENG",
-          PlaceType: "Town",
-          Parent_ID: 12587762
-        },
-        {
-          WOE_ID: 2367231,
-          ISO: "US",
-          Name: "Boulder",
-          Language: "ENG",
-          PlaceType: "Town",
-          Parent_ID: 12587734
-        },
-        {
           WOE_ID: 2383489,
           ISO: "US",
           Name: "Colorado Springs",
           Language: "ENG",
           PlaceType: "Town",
           Parent_ID: 12587747
+        },
+        {
+          WOE_ID: 2352824,
+          ISO: "US",
+          Name: "Albuquerque",
+          Language: "ENG",
+          PlaceType: "Town",
+          Parent_ID: 12589279
+        },
+        {
+          WOE_ID: 2487610,
+          ISO: "US",
+          Name: "Salt Lake City",
+          Language: "ENG",
+          PlaceType: "Town",
+          Parent_ID: 12590278
+        },
+        {
+          WOE_ID: 2388929,
+          ISO: "US",
+          Name: "Dallas",
+          Language: "ENG",
+          PlaceType: "Town",
+          Parent_ID: 12590063
+        },
+        {
+          WOE_ID: 2486982,
+          ISO: "US",
+          Name: "St. Louis",
+          Language: "ENG",
+          PlaceType: "Town",
+          Parent_ID: 12589067
+        },
+        {
+          WOE_ID: 2381475,
+          ISO: "US",
+          Name: "Cleveland",
+          Language: "ENG",
+          PlaceType: "Town",
+          Parent_ID: 12589544
         }
       ]);
     });

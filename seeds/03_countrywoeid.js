@@ -30,7 +30,7 @@ exports.seed = function(knex, Promise) {
         {
           WOE_ID: 23424853,
           ISO: "IT",
-          Name: "Italia",
+          Name: "Italy",
           Language: "ITA",
           PlaceType: "Country",
           Parent_ID: 1
@@ -38,7 +38,7 @@ exports.seed = function(knex, Promise) {
         {
           WOE_ID: 23424856,
           ISO: "JP",
-          Name: "%u65E5%u672C-Japan",
+          Name: "Japan",
           Language: "JPN",
           PlaceType: "Country",
           Parent_ID: 1
@@ -76,14 +76,6 @@ exports.seed = function(knex, Promise) {
           Parent_ID: 1
         },
         {
-          WOE_ID: 23424911,
-          ISO: "NP",
-          Name: "Nepal",
-          Language: "ENG",
-          PlaceType: "Country",
-          Parent_ID: 1
-        },
-        {
           WOE_ID: 23424976,
           ISO: "UA",
           Name: "Ukraine",
@@ -94,7 +86,7 @@ exports.seed = function(knex, Promise) {
         {
           WOE_ID: 23424868,
           ISO: "KR",
-          Name: "%uD55C%uAD6D-Korea",
+          Name: "Korea",
           Language: "KOR",
           PlaceType: "Country",
           Parent_ID: 1
@@ -164,22 +156,6 @@ exports.seed = function(knex, Promise) {
           Parent_ID: 1
         },
         {
-          WOE_ID: 23424781,
-          ISO: "CN",
-          Name: "%u4E2D%u570B-China",
-          Language: "CHI",
-          PlaceType: "Country",
-          Parent_ID: 1
-        },
-        {
-          WOE_ID: 23424738,
-          ISO: "AE",
-          Name: "UAE-%u0627%u0644%u0627%u0645%u0627%u0631%u0627%u062A",
-          Language: "ARA",
-          PlaceType: "Country",
-          Parent_ID: 1
-        },
-        {
           WOE_ID: 23424848,
           ISO: "IN",
           Name: "India",
@@ -192,6 +168,14 @@ exports.seed = function(knex, Promise) {
           ISO: "IL",
           Name: "Israel",
           Language: "ENG",
+          PlaceType: "Country",
+          Parent_ID: 1
+        },
+        {
+          WOE_ID: 23424738,
+          ISO: "AE",
+          Name: "United Arab Emirates",
+          Language: "ARA",
           PlaceType: "Country",
           Parent_ID: 1
         }

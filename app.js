@@ -25,13 +25,13 @@ app.get("/", (request, response) => {
     .then(personalLocations =>
       queries.list("woeid").then(woeid =>
         queries.list("countrywoeid").then(countrywoeid =>
-          queries.list("stateswoeid").then(stateswoeid =>
+          queries.list("worldcitieswoeid").then(worldcitieswoeid =>
             queries.list("citieswoeid").then(citieswoeid =>
               response.json({
                 personalLocations: personalLocations,
                 woeid: woeid,
                 countrywoeid: countrywoeid,
-                stateswoeid: stateswoeid,
+                worldcitieswoeid: worldcitieswoeid,
                 citieswoeid: citieswoeid
               })
             )
@@ -124,20 +124,20 @@ app.get("/countrywoeid/:id", (request, response) => {
     })
     .catch(console.error);
 });
-app.get("/stateswoeid", (request, response) => {
+app.get("/worldcitieswoeid", (request, response) => {
   queries
-    .list("stateswoeid")
-    .then(stateswoeid => {
-      response.json({ stateswoeid });
+    .list("worldcitieswoeid")
+    .then(worldcitieswoeid => {
+      response.json({ worldcitieswoeid });
     })
     .catch(error => console.log(error));
 });
 
-app.get("/stateswoeid/:id", (request, response) => {
+app.get("/worldcitieswoeid/:id", (request, response) => {
   queries
-    .read(request.params.id, "stateswoeid")
-    .then(stateswoeid => {
-      stateswoeid ? response.json({ stateswoeid }) : response.sendStatus(404);
+    .read(request.params.id, "worldcitieswoeid")
+    .then(worldcitieswoeid => {
+      worldcitieswoeid ? response.json({ worldcitieswoeid }) : response.sendStatus(404);
     })
     .catch(console.error);
 });

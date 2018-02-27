@@ -1,5 +1,5 @@
 exports.up = function(knex, Promise) {
-  return knex.schema.createTable("stateswoeid", table => {
+  return knex.schema.createTable("worldcitieswoeid", table => {
     table.increments("id").primary();
     table.text("WOE_ID");
     table.text("ISO");
@@ -11,5 +11,5 @@ exports.up = function(knex, Promise) {
 };
 
 exports.down = function(knex, Promise) {
-  return knex.schema.dropTableIfExists("stateswoeid");
+  return knex.schema.dropTableIfExists("worldcitieswoeid");
 };
