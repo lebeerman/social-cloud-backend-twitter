@@ -6,8 +6,8 @@ const queries = require("./queries");
 const bodyParser = require("body-parser");
 const cors = require("cors");
 const Twitter = require("twitter");
-const morgan = require('morgan');
-const devMode = process.env.NODE_ENV !== 'production';
+const morgan = require("morgan");
+const devMode = process.env.NODE_ENV !== "production";
 const client = new Twitter({
   consumer_key: process.env.CONSUMER_KEY,
   consumer_secret: process.env.CONSUMER_SECRET,
@@ -17,17 +17,26 @@ const client = new Twitter({
 
 app.use(cors());
 app.use(bodyParser.json());
-app.use(morgan(devMode ? 'dev' : 'combined'));
+app.use(morgan(devMode ? "dev" : "combined"));
 
 app.get("/", (request, response) => {
   queries
     .list("personalLocations")
     .then(personalLocations =>
       queries.list("woeid").then(woeid =>
-        response.json({
-          personalLocations: personalLocations,
-          woeid: woeid
-        })
+        queries.list("countrywoeid").then(countrywoeid =>
+          queries.list("worldcitieswoeid").then(worldcitieswoeid =>
+            queries.list("citieswoeid").then(citieswoeid =>
+              response.json({
+                personalLocations: personalLocations,
+                woeid: woeid,
+                countrywoeid: countrywoeid,
+                worldcitieswoeid: worldcitieswoeid,
+                citieswoeid: citieswoeid
+              })
+            )
+          )
+        )
       )
     )
     .catch(error => console.log(error));
@@ -46,7 +55,7 @@ app.get("/tweets", (request, response, next) => {
 });
 
 app.get("/tweets/:id", (request, response, next) => {
-  var id = {id: request.params.id};
+  var id = { id: request.params.id };
   client.get("trends/place", id, (error, tweets, twitterResponse) => {
     if (error && error.code === 34) {
       res.status(200).send({ tweets: { trends: [] }, error: error.message });
@@ -98,6 +107,57 @@ app.get("/woeid/:id", (request, response) => {
     })
     .catch(console.error);
 });
+app.get("/countrywoeid", (request, response) => {
+  queries
+    .list("countrywoeid")
+    .then(countrywoeid => {
+      response.json({ countrywoeid });
+    })
+    .catch(error => console.log(error));
+});
+
+app.get("/countrywoeid/:id", (request, response) => {
+  queries
+    .read(request.params.id, "countrywoeid")
+    .then(countrywoeid => {
+      countrywoeid ? response.json({ countrywoeid }) : response.sendStatus(404);
+    })
+    .catch(console.error);
+});
+app.get("/worldcitieswoeid", (request, response) => {
+  queries
+    .list("worldcitieswoeid")
+    .then(worldcitieswoeid => {
+      response.json({ worldcitieswoeid });
+    })
+    .catch(error => console.log(error));
+});
+
+app.get("/worldcitieswoeid/:id", (request, response) => {
+  queries
+    .read(request.params.id, "worldcitieswoeid")
+    .then(worldcitieswoeid => {
+      worldcitieswoeid ? response.json({ worldcitieswoeid }) : response.sendStatus(404);
+    })
+    .catch(console.error);
+});
+app.get("/citieswoeid", (request, response) => {
+  queries
+    .list("citieswoeid")
+    .then(citieswoeid => {
+      response.json({ citieswoeid });
+    })
+    .catch(error => console.log(error));
+});
+
+app.get("/citieswoeid/:id", (request, response) => {
+  queries
+    .read(request.params.id, "citieswoeid")
+    .then(citieswoeid => {
+      citieswoeid ? response.json({ citieswoeid }) : response.sendStatus(404);
+    })
+    .catch(console.error);
+});
 
 app.post("/personalLocations", (request, response) => {
   queries
@@ -135,18 +195,18 @@ function notFound(req, res, next) {
   if (!/favicon\.ico$/.test(url) && !/robots\.txt$/.test(url)) {
     // Don"t log less important auto requests
     console.error("[404: Requested file not found] ", url);
-    return res.status(200).send({message: "url path not found"});
+    return res.status(200).send({ message: "url path not found" });
   }
-  res.status(404).send({error: "Url not found", status: 404, url});
+  res.status(404).send({ error: "Url not found", status: 404, url });
 }
 
 function errorHandler(err, req, res, next) {
   console.error("ERROR", err);
-  const stack =  devMode ? err.stack : undefined;
+  const stack = devMode ? err.stack : undefined;
   res.status(500).send({
     error: err.message,
     url: req.originalUrl,
-    stack,
+    stack
   });
 }
 
